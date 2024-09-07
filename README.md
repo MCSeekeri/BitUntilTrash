@@ -3,9 +3,10 @@
 一个多目标文件夹定时备份工具。
 
 ## 使用
+
 but 目前有两种版本。
-使用 Rust 编写的二进制程序。
-使用 bash 的脚本。
+- 使用 Rust 编写的二进制程序。
+- 使用 bash 的脚本。
 
 ### 二进制
 
@@ -18,11 +19,13 @@ but 目前有两种版本。
 chmod +x but.sh
 ./but.sh -h
 ```
-请确保运行之前已经安装了 tar 和 zstd.
+请确保运行之前已经安装了 tar 和 zstd 软件包。
+部分发行版需要手动安装 cronie 包。
 
 ## 软件配置
 
 ### 配置文件示例
+
 ```toml
 [settings]
 interval = 300
@@ -38,6 +41,7 @@ from = "/opt/Server/config/"
 dest = "./"
 ```
 ## 配置文件位置
+
 but 将依次在 `/etc/but.conf` `$HOME/.config/but.conf` 和 `./but.conf` 三个位置寻找配置文件，优先级从高到低。
 
 ### 作为系统服务运行
@@ -54,5 +58,6 @@ systemctl enable --now but
 > 如果启动出错，可以输入`systemctl status but`查看错误日志。
 
 ## 备份原理
+
 限于技术原因，目前 but 不支持增量备份，每次备份都会是完整备份。
 不过为了节约空间，当指定目录未发生变化时，but 不会重复备份。
